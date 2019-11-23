@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MenuManager : MonoBehaviour
 {
@@ -36,7 +37,12 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ToggleScoreBoard(bool set = true){
-        scoreBoard.SetActive(set);
+        if(set){
+            NetworkManager.Get<Players>("/scores", SetScoreBoard);
+        }
+        else{
+            scoreBoard.SetActive(set);
+        }
     }
 
     public void Quit(){

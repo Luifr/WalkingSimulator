@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else{
-            Destroy(instance);
+            Destroy(gameObject);
         }
     }
 
@@ -29,6 +29,10 @@ public class ScoreManager : MonoBehaviour
     public static void CollectCoin(int value = 1){
         score += value;
         text.text = "Score: " + score;
+    }
+
+    public static int GetScore(){
+        return score;
     }
 
 }

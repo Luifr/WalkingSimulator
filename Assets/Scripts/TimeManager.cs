@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class TimeManager : MonoBehaviour
 {
@@ -42,6 +44,10 @@ public class TimeManager : MonoBehaviour
         gameIsOver = true;
         GameObject.Find("Player").GetComponent<PlayerMovement>().canWalk = false;
         if(gameOverPanel) gameOverPanel.SetActive(true);
+        WWWForm data = new WWWForm();
+        data.AddField("name", NetworkManager.name);
+        data.AddField("score", ScoreManager.GetScore());
+        NetworkManager.Post<string>("/score", data, null);
     }
 
     public void IncreaseTime(float time = 1f){
